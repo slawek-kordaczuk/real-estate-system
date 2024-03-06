@@ -11,3 +11,6 @@ INSERT INTO region VALUES (10, 'LUBL', 'Lubelskie - Lublin');
 INSERT INTO region VALUES (11, 'LUBL_INNE', 'Lubelskie - poza Lublinem');
 INSERT INTO region VALUES (12, 'ZPOM', 'Zachodniopomorskie');
 INSERT INTO region VALUES (13, 'LUBSK', 'Lubuskie');
+
+INSERT INTO estate VALUES(1, 'SL_KATO', 666.99, 'FLAT', 50.6, 4, 'description', '2023-12-29');
+INSERT INTO estate VALUES(2, 'SL_KATO', 544565.99, 'FLAT', 50.6, 4, 'description', '2023-12-29');

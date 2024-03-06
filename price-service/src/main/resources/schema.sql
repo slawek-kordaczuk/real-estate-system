@@ -14,15 +14,14 @@ DROP TABLE IF EXISTS estate CASCADE;
 
 CREATE TABLE estate
 (
-    id           UUID PRIMARY KEY,
-    region_id    INT            NOT NULL,
+    id           INT PRIMARY KEY,
+    region_code  VARCHAR(16)    NOT NULL,
     price        NUMERIC(10, 2) NOT NULL,
     type         VARCHAR(30)    NOT NULL,
     area         FLOAT          NOT NULL,
     rooms        INT            NOT NULL,
     description  VARCHAR(500)   NOT NULL,
-    created_date TIMESTAMP      NOT NULL,
-    foreign key (region_id) references region (id)
+    created_date TIMESTAMP      NOT NULL
 );
 
-CREATE UNIQUE INDEX "estate_index" ON estate (region_id, type, rooms);
+CREATE UNIQUE INDEX "estate_index" ON estate (id, region_code);

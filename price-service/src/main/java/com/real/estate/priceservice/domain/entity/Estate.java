@@ -18,7 +18,8 @@ import java.util.UUID;
 public class Estate {
 
     @Id
-    private UUID id;
+    private Integer id;
+    private String regionCode;
     @Enumerated(EnumType.STRING)
     private EstateType type;
     private BigDecimal price;
@@ -26,10 +27,6 @@ public class Estate {
     private Float area;
     private Integer rooms;
     private LocalDate createdDate;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "REGION_ID")
-    private Region region;
 
     @Override
     public boolean equals(Object o) {

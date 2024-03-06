@@ -20,9 +20,6 @@ public class Region {
     private String regionCode;
     private String description;
 
-    @OneToMany(mappedBy = "region", cascade = CascadeType.DETACH)
-    private List<Estate> estates;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

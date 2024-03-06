@@ -1,6 +1,8 @@
 package com.real.estate.priceservice.config;
 
 import io.r2dbc.spi.ConnectionFactory;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
