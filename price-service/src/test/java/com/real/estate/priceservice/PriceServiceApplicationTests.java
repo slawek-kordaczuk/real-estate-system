@@ -38,7 +38,7 @@ class PriceServiceApplicationTests {
 				.getResponseBody();
 
 		//Then
-		assertEquals( "0", response.getAvgValue());
+		assertEquals( "272616.49", response.getAvgValue());
 	}
 
 }

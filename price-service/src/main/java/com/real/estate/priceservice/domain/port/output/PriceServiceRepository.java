@@ -7,12 +7,13 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public interface PriceServiceRepository {
 
     Mono<Estate> save(Estate estate);
 
-    Mono<BigDecimal> getAveragePriceByQuery(AveragePriceQuery averagePriceQuery);
+    Flux<Estate> getAveragePriceByQuery(AveragePriceQuery averagePriceQuery);
 
     Flux<Region> findAllRegions();
 

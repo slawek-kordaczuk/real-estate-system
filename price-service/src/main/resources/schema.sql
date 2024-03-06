@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS estate CASCADE;
 
 CREATE TABLE estate
 (
-    id           INT PRIMARY KEY,
+    id           UUID PRIMARY KEY,
     region_code  VARCHAR(16)    NOT NULL,
     price        NUMERIC(10, 2) NOT NULL,
     type         VARCHAR(30)    NOT NULL,

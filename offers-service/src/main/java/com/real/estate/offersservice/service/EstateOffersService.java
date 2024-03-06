@@ -1,4 +1,4 @@
-package com.real.estate.offersservice.domain.service;
+package com.real.estate.offersservice.service;
 
 import com.real.estate.offersservice.domain.entity.EstateOffer;
 import com.real.estate.offersservice.repository.EstateOffersRepository;

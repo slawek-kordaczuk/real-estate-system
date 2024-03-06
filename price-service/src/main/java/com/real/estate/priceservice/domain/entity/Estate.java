@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Estate {
 
     @Id
-    private Integer id;
+    private UUID id;
     private String regionCode;
     @Enumerated(EnumType.STRING)
     private EstateType type;

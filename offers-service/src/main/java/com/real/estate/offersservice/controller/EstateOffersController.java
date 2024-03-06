@@ -1,7 +1,7 @@
 package com.real.estate.offersservice.controller;
 
 import com.real.estate.offersservice.domain.entity.EstateOffer;
-import com.real.estate.offersservice.domain.service.EstateOffersService;
+import com.real.estate.offersservice.service.EstateOffersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

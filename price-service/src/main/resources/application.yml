@@ -10,11 +10,8 @@ spring:
     url: r2dbc:h2:mem:///estate
     username: admin
     password: password
-  h2:
-    console:
-      enabled: true
 
 external-api:
   number-of-retries: 3
   cron: 0 0 21 * * *
-
+  offer-service-host: http://localhost:8081

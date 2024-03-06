@@ -4,6 +4,7 @@ import io.r2dbc.spi.ConnectionFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -14,6 +15,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class PriceServiceConfiguration {
+
+    @Value("${external-api.offer-service-host}")
+    private String offerServiceHost;
 
     @Bean
     public ConnectionFactoryInitializer initializer(@Qualifier("connectionFactory") ConnectionFactory connectionFactory) {
@@ -30,6 +34,6 @@ public class PriceServiceConfiguration {
 
     @Bean
     public WebClient webClient(WebClient.Builder builder) {
-        return builder.build();
+        return builder.baseUrl(offerServiceHost).build();
     }
 }

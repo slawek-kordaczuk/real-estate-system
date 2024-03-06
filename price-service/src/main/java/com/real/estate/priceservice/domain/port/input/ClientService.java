@@ -3,12 +3,12 @@ package com.real.estate.priceservice.domain.port.input;
 import com.real.estate.priceservice.domain.dto.create.CreateCommand;
 import com.real.estate.priceservice.domain.dto.create.CreateEstateResponse;
 import com.real.estate.priceservice.domain.entity.Region;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface ClientService {
 
-    CreateEstateResponse upsertEstates(List<CreateCommand> createEstateCommands);
+    Mono<CreateEstateResponse> createEstates(Flux<CreateCommand> createEstateCommands);
 
-    List<Region> fetchAllRegions();
+    Flux<Region> fetchAllRegions();
 }

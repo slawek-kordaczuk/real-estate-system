@@ -2,30 +2,48 @@ package com.real.estate.priceservice.service;
 
 import com.real.estate.priceservice.domain.dto.create.CreateCommand;
 import com.real.estate.priceservice.domain.dto.create.CreateEstateResponse;
+import com.real.estate.priceservice.domain.entity.Estate;
 import com.real.estate.priceservice.domain.entity.Region;
+import com.real.estate.priceservice.domain.exception.EstateDomainException;
 import com.real.estate.priceservice.domain.port.input.ClientService;
 import com.real.estate.priceservice.domain.port.output.PriceServiceRepository;
-import org.springframework.stereotype.Component;
+import com.real.estate.priceservice.service.mapper.EstateDataMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Service
 class ClientServiceImpl implements ClientService {
 
     private final PriceServiceRepository priceServiceRepository;
 
-    ClientServiceImpl(PriceServiceRepository priceServiceRepository) {
+    private final EstateDataMapper estateDataMapper;
+
+    ClientServiceImpl(PriceServiceRepository priceServiceRepository, EstateDataMapper estateDataMapper) {
         this.priceServiceRepository = priceServiceRepository;
+        this.estateDataMapper = estateDataMapper;
     }
 
     @Override
-    public CreateEstateResponse upsertEstates(List<CreateCommand> createEstateCommands) {
-        return null;
+    public Mono<CreateEstateResponse> createEstates(Flux<CreateCommand> createEstateCommands) {
+        Flux<Estate> estateFlux = createEstateCommands.map(estateDataMapper::createEstateCommandToEstate);
+        return estateFlux
+                .flatMap(this::saveEstate)
+                .collectList()
+                .map(savedRecordsList -> new CreateEstateResponse(savedRecordsList.size()));
     }
 
     @Override
-    public List<Region> fetchAllRegions() {
-        return null;
+    public Flux<Region> fetchAllRegions() {
+        return priceServiceRepository.findAllRegions();
+    }
+
+    private Mono<Estate> saveEstate(Estate estate) throws EstateDomainException {
+        return priceServiceRepository.save(estate);
     }
 }
