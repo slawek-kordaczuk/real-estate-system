@@ -1,4 +1,4 @@
-package com.real.estate.priceservice.client.model;
+package com.real.estate.offersservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 @AllArgsConstructor
-public class RealEstateData {
+public class EstateData {
     @JsonProperty
     private String id;
     @JsonProperty

@@ -1,6 +1,7 @@
 package com.real.estate.offersservice.controller;
 
-import com.real.estate.offersservice.domain.entity.EstateOffer;
+import com.real.estate.offersservice.dto.CreateEstateOffersResponse;
+import com.real.estate.offersservice.entity.EstateOffer;
 import com.real.estate.offersservice.service.EstateOffersService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/offers")
+@RequestMapping("/api")
 @Slf4j
 public class EstateOffersController {
 
@@ -19,19 +20,11 @@ public class EstateOffersController {
         this.estateOffersService = estateOffersService;
     }
 
-    @PutMapping("/add")
+    @PutMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<ResponseEntity<EstateOffer>> addMovieInfo(@RequestParam String id,
-                                                          @RequestParam String description) {
-        var addEstate = estateOffersService.addEstateOffer(id, description);
+    public Mono<ResponseEntity<CreateEstateOffersResponse>> addEstateOffers() {
+        var addEstate = estateOffersService.createEstateOffers();
         return addEstate.map(addedEstate -> ResponseEntity.ok()
-                .body(addedEstate));
-    }
-
-    @GetMapping("/get")
-    public Mono<ResponseEntity<EstateOffer>> getEstate(@RequestParam String id) {
-        var estate = estateOffersService.getEstate(id);
-        return estate.map(addedEstate -> ResponseEntity.ok()
                 .body(addedEstate));
     }
 }

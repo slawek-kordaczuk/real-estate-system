@@ -30,8 +30,10 @@ class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Mono<CreateEstateResponse> createEstates(Flux<CreateCommand> createEstateCommands) {
-        Flux<Estate> estateFlux = createEstateCommands.map(estateDataMapper::createEstateCommandToEstate);
+    public Mono<CreateEstateResponse> createEstates(List<CreateCommand> createEstateCommands) {
+        Flux<Estate> estateFlux = Flux.fromIterable(createEstateCommands.stream()
+                .map(estateDataMapper::createEstateCommandToEstate)
+                .toList());
         return estateFlux
                 .flatMap(this::saveEstate)
                 .collectList()

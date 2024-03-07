@@ -2,7 +2,7 @@ package com.real.estate.priceservice.client;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.real.estate.priceservice.client.model.RealEstatePayload;
+import com.real.estate.priceservice.client.dto.RealEstatePayload;
 import com.real.estate.priceservice.domain.exception.ExternalApiClientException;
 import com.real.estate.priceservice.domain.exception.ExternalApiServerException;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
-import reactor.util.retry.RetrySpec;
 
 import java.time.Duration;
 
@@ -67,8 +66,8 @@ class OfferServiceClient {
         }
     }
     private Retry retrySpec() {
-        return RetrySpec.fixedDelay(numberOfRetries, Duration.ofSeconds(1))
-                .filter((ex) -> ex instanceof ExternalApiServerException)
+        return Retry.fixedDelay(numberOfRetries, Duration.ofSeconds(1))
+                .filter(ExternalApiServerException.class::isInstance)
                 .onRetryExhaustedThrow(((retryBackoffSpec, retrySignal) -> Exceptions.propagate(retrySignal.failure())));
 
     }

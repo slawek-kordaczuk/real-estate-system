@@ -1,6 +1,6 @@
 package com.real.estate.priceservice.client.mapper;
 
-import com.real.estate.priceservice.client.model.RealEstateData;
+import com.real.estate.priceservice.client.dto.RealEstateData;
 import com.real.estate.priceservice.domain.dto.create.CreateCommand;
 import com.real.estate.priceservice.domain.entity.EstateType;
 import com.real.estate.priceservice.domain.entity.Region;

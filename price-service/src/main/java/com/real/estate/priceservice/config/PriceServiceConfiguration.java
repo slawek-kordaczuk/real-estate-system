@@ -14,7 +14,7 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class PriceServiceConfiguration {
+class PriceServiceConfiguration {
 
     @Value("${external-api.offer-service-host}")
     private String offerServiceHost;

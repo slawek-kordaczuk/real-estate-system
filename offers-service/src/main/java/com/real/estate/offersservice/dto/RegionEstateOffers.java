@@ -1,4 +1,4 @@
-package com.real.estate.priceservice.client.model;
+package com.real.estate.offersservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -8,11 +8,11 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @Builder
-public class RealEstatePayload {
+@AllArgsConstructor
+public class RegionEstateOffers {
     @JsonProperty
     private String totalPages;
     @JsonProperty
-    private List<RealEstateData> data;
+    private List<EstateData> data;
 }

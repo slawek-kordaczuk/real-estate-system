@@ -34,7 +34,7 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.projectreactor:reactor-test")
-	testImplementation ("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:3.0.3")
+	testImplementation ("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:4.1.1")
 }
 
 tasks.withType<Test> {

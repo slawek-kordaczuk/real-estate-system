@@ -1,16 +1,16 @@
-package com.real.estate.offersservice.domain.entity;
+package com.real.estate.offersservice.entity;
 
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.validation.annotation.Validated;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
-@Data
+@Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
@@ -19,7 +19,12 @@ public class EstateOffer {
 
     @Id
     private UUID id;
-    @NotNull
+    private String regionCode;
+    private EstateType type;
+    private BigDecimal price;
     private String description;
+    private Float area;
+    private Integer rooms;
+    private LocalDate createdDate;
 
 }
