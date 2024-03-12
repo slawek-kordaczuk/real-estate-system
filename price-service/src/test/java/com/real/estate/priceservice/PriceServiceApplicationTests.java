@@ -27,6 +27,8 @@ class PriceServiceApplicationTests {
 						.queryParam("types", "flat")
 						.queryParam("dateSince", "20231228")
 						.queryParam("dateUntil", "20231231")
+						.queryParam("page", "0")
+						.queryParam("pageSize", "2")
 						.build("SL_KATO"))
 
 				.exchange()

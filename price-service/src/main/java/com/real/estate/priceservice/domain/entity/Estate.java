@@ -2,6 +2,7 @@ package com.real.estate.priceservice.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -4,6 +4,8 @@ import com.real.estate.priceservice.domain.dto.create.CreateCommand;
 import com.real.estate.priceservice.domain.entity.Estate;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class EstateDataMapper {
 
@@ -16,6 +18,7 @@ public class EstateDataMapper {
                 .description(createCommand.getDescription())
                 .rooms(createCommand.getRooms())
                 .price(createCommand.getPrice())
+                .createdDate(LocalDate.now())
                 .build();
     }
 }

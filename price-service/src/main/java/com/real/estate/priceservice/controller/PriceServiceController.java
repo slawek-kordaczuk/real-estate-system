@@ -5,6 +5,8 @@ import com.real.estate.priceservice.domain.dto.average.AveragePriceResponse;
 import com.real.estate.priceservice.domain.dto.average.RoomSize;
 import com.real.estate.priceservice.domain.port.input.PriceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +31,23 @@ class PriceServiceController {
 
     @GetMapping("/real-estates-stats/{regionCode}")
     public Mono<ResponseEntity<AveragePriceResponse>> averageEstatePrice(@PathVariable String regionCode,
-                                                                           @RequestParam String size,
-                                                                           @RequestParam String rooms,
-                                                                           @RequestParam List<String> types,
-                                                                           @RequestParam @DateTimeFormat(pattern = "yyyyMMdd") Date dateSince,
-                                                                           @RequestParam @DateTimeFormat(pattern = "yyyyMMdd") Date dateUntil) {
+                                                                         @RequestParam String size,
+                                                                         @RequestParam String rooms,
+                                                                         @RequestParam List<String> types,
+                                                                         @RequestParam @DateTimeFormat(pattern = "yyyyMMdd") Date dateSince,
+                                                                         @RequestParam @DateTimeFormat(pattern = "yyyyMMdd") Date dateUntil,
+                                                                         @RequestParam(defaultValue = "0") int page,
+                                                                         @RequestParam(defaultValue = "15") int pageSize) {
+        Pageable paging = PageRequest.of(page, pageSize);
         return priceService.calculateAveragePrice(AveragePriceQuery.builder()
-                        .regionCode(regionCode)
-                        .roomSize(RoomSize.valueOf(size))
-                        .rooms(Integer.valueOf(rooms))
-                        .types(typesToUpperCase(types))
-                        .dataSince(convertToLocalDate(dateSince))
-                        .dataUntil(convertToLocalDate(dateUntil))
-                        .build())
+                                .regionCode(regionCode)
+                                .roomSize(RoomSize.valueOf(size))
+                                .rooms(Integer.valueOf(rooms))
+                                .types(typesToUpperCase(types))
+                                .dataSince(convertToLocalDate(dateSince))
+                                .dataUntil(convertToLocalDate(dateUntil))
+                                .build(),
+                        paging)
                 .map(averagePriceResponse -> ResponseEntity.ok().body(averagePriceResponse))
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }

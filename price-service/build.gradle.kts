@@ -28,6 +28,11 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-databind")
 	implementation("com.fasterxml.jackson.core:jackson-annotations")
 	implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
+	implementation("org.springframework.boot:spring-boot-starter-jooq")
+	implementation("org.jooq:jooq:3.19.6")
+	implementation("org.jooq:jooq-meta:3.19.6")
+	implementation("org.jooq:jooq-codegen:3.19.6")
+
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("io.r2dbc:r2dbc-h2")

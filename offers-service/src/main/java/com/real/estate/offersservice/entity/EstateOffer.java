@@ -19,7 +19,7 @@ public class EstateOffer {
 
     @Id
     private UUID id;
-    private String regionCode;
+    private RegionCode regionCode;
     private EstateType type;
     private BigDecimal price;
     private String description;

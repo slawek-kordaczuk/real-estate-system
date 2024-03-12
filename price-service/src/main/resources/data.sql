@@ -1,3 +1,28 @@
+DROP TABLE IF EXISTS region CASCADE;
+
+CREATE TABLE region
+(
+    id          INT PRIMARY KEY,
+    region_code VARCHAR(16)  NOT NULL,
+    description VARCHAR(500) NOT NULL
+);
+
+DROP TABLE IF EXISTS estate CASCADE;
+
+CREATE TABLE estate
+(
+    id           UUID PRIMARY KEY,
+    region_code  VARCHAR(16)    NOT NULL,
+    price        NUMERIC(10, 2) NOT NULL,
+    type         VARCHAR(30)    NOT NULL,
+    area         FLOAT          NOT NULL,
+    rooms        INT            NOT NULL,
+    description  VARCHAR(500)   NOT NULL,
+    created_date TIMESTAMP      NOT NULL
+);
+
+CREATE UNIQUE INDEX "estate_index" ON estate (id, region_code);
+
 INSERT INTO region VALUES (1, 'DLN_WROC_C', 'Dolnośląskie - Wrocław centrum');
 INSERT INTO region VALUES (2, 'DLN_WROC_PC', 'Dolnośląskie - Wrocław poza centrum');
 INSERT INTO region VALUES (3, 'DLN_POZA_WROC', 'Dolnośląskie - poza Wrocławiem');
@@ -14,3 +39,4 @@ INSERT INTO region VALUES (13, 'LUBSK', 'Lubuskie');
 
 INSERT INTO estate VALUES('6d544a3e-60f7-478a-bacb-7d71203f3d67', 'SL_KATO', 666.99, 'FLAT', 50.6, 4, 'description', '2023-12-29');
 INSERT INTO estate VALUES('f92f03f4-34e2-448f-80c6-6f2650f34013', 'SL_KATO', 544565.99, 'FLAT', 50.6, 4, 'description', '2023-12-29');
+INSERT INTO estate VALUES('db621317-e22d-4002-ad99-1ec78fc271d0', 'SL_KATO', 99999.66, 'FLAT', 99.6, 5, 'description', '2023-12-29');

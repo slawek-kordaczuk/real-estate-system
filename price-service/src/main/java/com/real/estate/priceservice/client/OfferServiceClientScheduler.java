@@ -33,15 +33,15 @@ class OfferServiceClientScheduler {
     }
 
     @Scheduled(
-            cron = "${external-api.cron}"
-//            ,initialDelayString = "1000"
+//            cron = "${external-api.cron}"
+            initialDelayString = "1000"
     )
     public void fetchEstatesFromOfferService() {
         Flux<Region> regions = clientService.fetchAllRegions();
         regions.flatMap(region -> getNumberOfTotalPages(region)
                         .subscribeOn(Schedulers.boundedElastic())
-                        .flatMapMany(numberOfPages -> Flux.range(1, Integer.parseInt(numberOfPages)))
-                        .flatMap(page -> getPayload(region, String.valueOf(page))).log()
+                        .flatMapMany(numberOfPages -> Flux.range(0, Integer.parseInt(numberOfPages)))
+                        .flatMap(page -> getPayload(region, String.valueOf(page)), 100)
                         .flatMap(payload -> createEstates(payload.getData(), region)))
                 .doOnError(error -> log.error(error.getMessage()))
                 .subscribe();
@@ -57,7 +57,7 @@ class OfferServiceClientScheduler {
     private Mono<String> getNumberOfTotalPages(Region region) {
         return offerServiceClient
                 .getRegionPageEstates(region
-                        .getRegionCode(), "1")
+                        .getRegionCode(), "0")
                 .map(RealEstatePayload::getTotalPages);
     }
 

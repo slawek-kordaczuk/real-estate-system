@@ -5,6 +5,7 @@ import com.real.estate.priceservice.domain.dto.average.AveragePriceResponse;
 import com.real.estate.priceservice.domain.entity.Estate;
 import com.real.estate.priceservice.domain.port.input.PriceService;
 import com.real.estate.priceservice.domain.port.output.PriceServiceRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -22,9 +23,9 @@ class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public Mono<AveragePriceResponse> calculateAveragePrice(AveragePriceQuery averageEstateQuery) {
+    public Mono<AveragePriceResponse> calculateAveragePrice(AveragePriceQuery averageEstateQuery, Pageable pageable) {
         return priceServiceRepository.findRegionByCode(averageEstateQuery.getRegionCode())
-                .map(region -> priceServiceRepository.getAveragePriceByQuery(averageEstateQuery))
+                .map(region -> priceServiceRepository.getAveragePriceByQuery(averageEstateQuery, pageable))
                 .flatMap(flux -> flux.collectList().map(this::averagePriceFromEstates));
     }
 

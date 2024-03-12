@@ -1,9 +1,10 @@
 package com.real.estate.priceservice.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.List;
 import java.util.Objects;
 
 @Getter

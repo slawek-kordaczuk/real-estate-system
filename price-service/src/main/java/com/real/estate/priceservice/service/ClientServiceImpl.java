@@ -10,6 +10,7 @@ import com.real.estate.priceservice.domain.port.output.PriceServiceRepository;
 import com.real.estate.priceservice.service.mapper.EstateDataMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

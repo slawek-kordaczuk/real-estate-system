@@ -9,5 +9,5 @@ public interface EstateOffersService {
 
     Mono<CreateEstateOffersResponse> createEstateOffers();
 
-    Mono<RegionEstateOffers> regionEstateOffers(Pageable pageable);
+    Mono<RegionEstateOffers> regionEstateOffers(String regionCode, Pageable pageable);
 }

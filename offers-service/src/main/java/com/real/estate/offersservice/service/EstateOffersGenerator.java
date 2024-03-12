@@ -2,6 +2,8 @@ package com.real.estate.offersservice.service;
 
 import com.real.estate.offersservice.entity.EstateOffer;
 import com.real.estate.offersservice.entity.EstateType;
+import com.real.estate.offersservice.entity.RegionCode;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+@Slf4j
 @Component
 class EstateOffersGenerator {
 
@@ -24,16 +27,16 @@ class EstateOffersGenerator {
         this.random = random;
     }
 
-    public Flux<EstateOffer> createEstateOffers(String region) {
+    public Flux<EstateOffer> createEstateOffers(RegionCode region) {
         List<EstateOffer> offers = new ArrayList<>();
-        var numberOfPages = random.nextInt() * (99 - 80) + 80;
+        var numberOfPages = random.nextInt(90 - 80) + 80;
         for (int i = 1; i <= numberOfPages; i++) {
             offers.add(createEstateOffer(region));
         }
         return Flux.fromIterable(offers);
     }
 
-    private EstateOffer createEstateOffer(String region){
+    private EstateOffer createEstateOffer(RegionCode region){
         return EstateOffer.builder()
                 .id(UUID.randomUUID())
                 .regionCode(region)

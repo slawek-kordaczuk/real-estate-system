@@ -37,7 +37,10 @@ class OfferServiceClient {
         Mono<String> payload =
                 webClient
                         .get()
-                        .uri("/api/real-estates/" + regionCode + "?page=" + page)
+                        .uri(uriBuilder -> uriBuilder
+                                .path("/api/real-estates/{regionCode}")
+                                .queryParam("page", page)
+                                .build(regionCode))
                         .retrieve()
                         .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {
                             log.info("Status code : {}", clientResponse.statusCode().value());
@@ -62,9 +65,10 @@ class OfferServiceClient {
         try {
             return Mono.just(objectMapper.readValue(response, RealEstatePayload.class));
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            throw new ExternalApiClientException(e.getMessage());
         }
     }
+
     private Retry retrySpec() {
         return Retry.fixedDelay(numberOfRetries, Duration.ofSeconds(1))
                 .filter(ExternalApiServerException.class::isInstance)
